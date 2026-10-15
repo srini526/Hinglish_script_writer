@@ -7,6 +7,13 @@ from dotenv import load_dotenv
 # Load keys from the project's .env file.
 load_dotenv(Path(__file__).resolve().parent / ".env")
 
+try:
+    if "GROQ_API_KEY" in st.secrets:
+        os.environ["GROQ_API_KEY"] = st.secrets["GROQ_API_KEY"]
+except (FileNotFoundError, KeyError):
+    pass
+
+
 from project import build_pipeline  # noqa: E402
 
 
